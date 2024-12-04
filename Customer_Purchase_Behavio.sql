@@ -1,3 +1,36 @@
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Gender VARCHAR(10),
+    JoinDate DATE,
+    Country VARCHAR(50),
+    Age INT
+);
+
+INSERT INTO Customers (CustomerID, Name, Email, Gender, JoinDate, Country, Age)
+VALUES
+(1, 'John Doe', 'john.doe@email.com', 'Male', '2020-01-01', 'USA', 35),
+(2, 'Jane Smith', 'jane@email.com', 'Female', '2019-06-15', 'UK', 29),
+(3, 'Chris Johnson', 'chris@email.com', NULL, '2021-03-20', NULL, 40);
+
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY,
+    CustomerID INT,
+    PurchaseDate DATE,
+    Amount DECIMAL(10, 2),
+    ProductCategory VARCHAR(50),
+    PaymentMethod VARCHAR(20),
+    Discount DECIMAL(5, 2),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Transactions (TransactionID, CustomerID, PurchaseDate, Amount, ProductCategory, PaymentMethod, Discount)
+VALUES
+(101, 1, '2024-01-01', 50.00, 'Electronics', 'Credit Card', 10.00),
+(102, 2, '2024-01-02', 20.00, 'Books', 'Cash', 0.00),
+(103, 1, '2024-01-03', -10.00, 'Clothing', 'Credit Card', 5.00);
+
 --Remove Duplicates
 DELETE FROM Transactions
 WHERE TransactionID IN (
